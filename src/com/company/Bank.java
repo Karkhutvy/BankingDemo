@@ -4,48 +4,57 @@ import java.util.HashMap;
 import java.util.Set;
 
 public class Bank {
-    private HashMap<Integer, Integer> accounts = new HashMap<>();
+    private HashMap<Integer, BankAccount> accounts = new HashMap<>();
     private double rate = 0.01;
     private int nextAcct = 0;
 
-    public int newAccount() {
+    public int newAccount(boolean isForeign) {
         int acctNum = nextAcct++;
-        accounts.put(acctNum, 0);
+        BankAccount ba = new BankAccount(acctNum);
+        ba.setIsforeign(isForeign);
+        accounts.put(acctNum, ba);
         return acctNum;
     }
 
     public int getBalance(int acctNum){
-        return accounts.get(acctNum);
+        BankAccount ba = accounts.get(acctNum);
+        return ba.getBalance();
     }
 
 
     public void deposit(int acctNum, int amt) {
-        int balance = accounts.get(acctNum);
-        accounts.put(acctNum, balance + amt);
+        BankAccount ba = accounts.get(acctNum);
+        int balance = ba.getBalance();
+        ba.setBalance(balance + amt);
+    }
+
+    public void setForeign(int acctNum, boolean isForeign){
+        BankAccount ba = accounts.get(acctNum);
+        ba.setIsforeign(isForeign);
     }
 
     public boolean authorizeLoan(int acctNum, int loanAmt) {
-        int balance = accounts.get(acctNum);
+        BankAccount ba = accounts.get(acctNum);
+        int balance = ba.getBalance();
         return  balance >= loanAmt / 2;
     }
 
 
     public void addInterest() {
-        Set<Integer> accts = accounts.keySet();
-        for (int i : accts) {
-            int balance = accounts.get(i);
+        for (BankAccount ba : accounts.values()) {
+            int balance = ba.getBalance();
             int newBalance = (int) (balance * (1 + rate));
-            accounts.put(i, newBalance);
+            ba.setBalance(newBalance);
         }
     }
 
     @Override
     public String toString() {
-        Set<Integer> accts = accounts.keySet();
-        String result = "The bank has " + accts.size() + " accounts.";
-        for (int i: accts) {
-            result += "\n\t Bank account " + i +
-                     ": balance=" + accounts.get(i);
+        String result = "The bank has " + accounts.size() + " accounts.";
+        for (BankAccount ba: accounts.values()) {
+            result += "\n\t Bank account " + ba.getAcctnum() +
+                     ": balance=" + ba.getBalance() +
+            ", is " + (ba.isIsforeign() ? "foreign" : "domestic");
         }
         return result;
     }
