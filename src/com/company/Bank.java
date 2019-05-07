@@ -5,7 +5,7 @@ import java.util.Set;
 
 public class Bank {
     private HashMap<Integer, BankAccount> accounts = new HashMap<>();
-    private double rate = 0.01;
+
     private int nextAcct = 0;
 
     public int newAccount(boolean isForeign) {
@@ -24,8 +24,7 @@ public class Bank {
 
     public void deposit(int acctNum, int amt) {
         BankAccount ba = accounts.get(acctNum);
-        int balance = ba.getBalance();
-        ba.setBalance(balance + amt);
+        ba.deposit(amt);
     }
 
     public void setForeign(int acctNum, boolean isForeign){
@@ -35,17 +34,16 @@ public class Bank {
 
     public boolean authorizeLoan(int acctNum, int loanAmt) {
         BankAccount ba = accounts.get(acctNum);
-        int balance = ba.getBalance();
-        return  balance >= loanAmt / 2;
+        return ba.hasEnoughCollateral(loanAmt);
     }
 
 
     public void addInterest() {
-        for (BankAccount ba : accounts.values()) {
-            int balance = ba.getBalance();
-            int newBalance = (int) (balance * (1 + rate));
-            ba.setBalance(newBalance);
+        for (BankAccount ba:accounts.values()) {
+            ba.addInterest();
         }
+
+
     }
 
     @Override
