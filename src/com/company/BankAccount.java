@@ -4,9 +4,9 @@ public class BankAccount {
     private int acctnum;
     private int balance = 0;
     private boolean isforeign = false;
-    private double rate = 0.01;
+    private double rate = 0.1;
 
-    public BankAccount(int a){
+    public BankAccount(int a) {
         acctnum = a;
     }
 
@@ -30,11 +30,11 @@ public class BankAccount {
         this.isforeign = b;
     }
 
-    public void deposit(int amt){
+    public void deposit(int amt) {
         balance += amt;
     }
 
-    public boolean hasEnoughCollateral(int loanAmt){
+    public boolean hasEnoughCollateral(int loanAmt) {
         return balance >= loanAmt / 2;
     }
 
@@ -47,7 +47,7 @@ public class BankAccount {
                 '}';
     }
 
-    public void addInterest(){
-        balance+=(int) (balance*rate);
+    public void addInterest() {
+        balance += (int) (balance * rate);
     }
 }

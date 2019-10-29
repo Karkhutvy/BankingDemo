@@ -1,12 +1,15 @@
 package com.company;
 
 import java.util.HashMap;
-import java.util.Set;
 
 public class Bank {
-    private HashMap<Integer, BankAccount> accounts = new HashMap<>();
+    private HashMap<Integer, BankAccount> accounts;
+    private int nextAcct;
 
-    private int nextAcct = 0;
+    public Bank(HashMap<Integer, BankAccount> accounts, int nextAcct) {
+        this.accounts = accounts;
+        this.nextAcct = nextAcct;
+    }
 
     public int newAccount(boolean isForeign) {
         int acctNum = nextAcct++;
@@ -16,7 +19,7 @@ public class Bank {
         return acctNum;
     }
 
-    public int getBalance(int acctNum){
+    public int getBalance(int acctNum) {
         BankAccount ba = accounts.get(acctNum);
         return ba.getBalance();
     }
@@ -27,7 +30,7 @@ public class Bank {
         ba.deposit(amt);
     }
 
-    public void setForeign(int acctNum, boolean isForeign){
+    public void setForeign(int acctNum, boolean isForeign) {
         BankAccount ba = accounts.get(acctNum);
         ba.setIsforeign(isForeign);
     }
@@ -39,7 +42,7 @@ public class Bank {
 
 
     public void addInterest() {
-        for (BankAccount ba:accounts.values()) {
+        for (BankAccount ba : accounts.values()) {
             ba.addInterest();
         }
 
@@ -49,10 +52,8 @@ public class Bank {
     @Override
     public String toString() {
         String result = "The bank has " + accounts.size() + " accounts.";
-        for (BankAccount ba: accounts.values()) {
-            result += "\n\t Bank account " + ba.getAcctnum() +
-                     ": balance=" + ba.getBalance() +
-            ", is " + (ba.isIsforeign() ? "foreign" : "domestic");
+        for (BankAccount ba : accounts.values()) {
+            result += "\n\t Bank account " + ba.toString();
         }
         return result;
     }

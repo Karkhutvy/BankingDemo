@@ -6,10 +6,14 @@ public class BankClient {
     private int current = -1;
     private Scanner scanner;
     private boolean done = false;
-    private Bank bank = new Bank();
+    private Bank bank;
+
+    public BankClient(Scanner scanner, Bank bank){
+        this.scanner = scanner;
+        this.bank = bank;
+    }
 
     public void run() {
-        scanner = new Scanner(System.in);
         while (!done) {
             System.out.println("Enter command (0-quit, 1-new," +
                     " 2-select, 3-deposit, 4-loan, 5-show, 6-interest 7-set foreign):");
@@ -52,7 +56,7 @@ public class BankClient {
     private void deposit() {
         System.out.print("Enter deposit amt: ");
         int amt = scanner.nextInt();
-        bank.deposit(current,amt);
+        bank.deposit(current, amt);
 
     }
 
@@ -78,11 +82,11 @@ public class BankClient {
         System.out.println("Bye");
     }
 
-    private void setForeign(){
+    private void setForeign() {
         bank.setForeign(current, requestForeign());
     }
 
-    private boolean requestForeign(){
+    private boolean requestForeign() {
         System.out.print("Enter 1 for foreign," +
                 " 2 for domestic: ");
         int val = scanner.nextInt();
