@@ -1,53 +1,17 @@
 package com.company;
 
-public class BankAccount {
-    private int acctnum;
-    private int balance = 0;
-    private boolean isforeign = false;
-    private double rate = 0.1;
+public interface BankAccount {
+    public abstract int getAcctNum();
 
-    public BankAccount(int a) {
-        acctnum = a;
-    }
+    public abstract int getBalance();
 
-    public int getAcctnum() {
-        return acctnum;
-    }
+    public abstract boolean isForeign();
 
-    public int getBalance() {
-        return balance;
-    }
+    public abstract void setForeign(boolean isforeign);
 
-    public void setBalance(int amt) {
-        this.balance = amt;
-    }
+    public abstract void deposit(int amnt);
 
-    public boolean isIsforeign() {
-        return isforeign;
-    }
+    public abstract boolean hasEnoughCollateral(int loanamt);
 
-    public void setIsforeign(boolean b) {
-        this.isforeign = b;
-    }
-
-    public void deposit(int amt) {
-        balance += amt;
-    }
-
-    public boolean hasEnoughCollateral(int loanAmt) {
-        return balance >= loanAmt / 2;
-    }
-
-    @Override
-    public String toString() {
-        return "BankAccount{" +
-                "acctnum=" + acctnum +
-                ", balance=" + balance +
-                ", isforeign=" + isforeign +
-                '}';
-    }
-
-    public void addInterest() {
-        balance += (int) (balance * rate);
-    }
+    public abstract String toString();
 }

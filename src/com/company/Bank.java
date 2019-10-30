@@ -1,5 +1,6 @@
 package com.company;
 
+import java.util.Date;
 import java.util.HashMap;
 
 public class Bank {
@@ -11,10 +12,15 @@ public class Bank {
         this.nextAcct = nextAcct;
     }
 
-    public int newAccount(boolean isForeign) {
+    public int newAccount(int type, boolean isForeign) {
         int acctNum = nextAcct++;
-        BankAccount ba = new BankAccount(acctNum);
-        ba.setIsforeign(isForeign);
+        BankAccount ba;
+        if (type == 1) {
+            ba = new SavingsAccount(acctNum);
+        } else {
+            ba = new CheckingAccount(acctNum);
+        }
+        ba.setForeign(isForeign);
         accounts.put(acctNum, ba);
         return acctNum;
     }
@@ -27,12 +33,15 @@ public class Bank {
 
     public void deposit(int acctNum, int amt) {
         BankAccount ba = accounts.get(acctNum);
+        if (ba.isForeign()) {
+            System.out.println(acctNum + " " + amt + " " + new Date());
+        }
         ba.deposit(amt);
     }
 
     public void setForeign(int acctNum, boolean isForeign) {
         BankAccount ba = accounts.get(acctNum);
-        ba.setIsforeign(isForeign);
+        ba.setForeign(isForeign);
     }
 
     public boolean authorizeLoan(int acctNum, int loanAmt) {
@@ -43,7 +52,11 @@ public class Bank {
 
     public void addInterest() {
         for (BankAccount ba : accounts.values()) {
-            ba.addInterest();
+            if (ba instanceof SavingsAccount) {
+                SavingsAccount sa = (SavingsAccount) ba;
+                sa.addInterest();
+            }
+
         }
 
 
