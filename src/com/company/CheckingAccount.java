@@ -38,6 +38,11 @@ public class CheckingAccount implements BankAccount {
     }
 
     @Override
+    public void addInterest() {
+        // do nothing
+    }
+
+    @Override
     public String toString() {
         return "CheckingAccount{" +
                 "acctnum=" + acctnum +
@@ -46,4 +51,13 @@ public class CheckingAccount implements BankAccount {
                 '}';
     }
 
+    @Override
+    public int compareTo(BankAccount bankAccount) {
+        int bal1 = getBalance();
+        int bal2 = bankAccount.getBalance();
+        if (bal1 == bal2)
+            return getAcctNum() - bankAccount.getAcctNum();
+        else
+            return bal1 - bal2;
+    }
 }

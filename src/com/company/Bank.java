@@ -52,14 +52,8 @@ public class Bank {
 
     public void addInterest() {
         for (BankAccount ba : accounts.values()) {
-            if (ba instanceof SavingsAccount) {
-                SavingsAccount sa = (SavingsAccount) ba;
-                sa.addInterest();
-            }
-
+                ba.addInterest();
         }
-
-
     }
 
     @Override

@@ -1,10 +1,16 @@
 package com.company;
 
+import java.util.SortedSet;
+import java.util.TreeSet;
+
 public class SavingsAccount implements BankAccount {
     private int acctnum;
     private int balance = 0;
     private boolean isforeign = false;
     private double rate = 0.1;
+
+   // TreeSet sortedSet = new TreeSet();
+
 
     public SavingsAccount(int a) {
         acctnum = a;
@@ -49,5 +55,15 @@ public class SavingsAccount implements BankAccount {
 
     public void addInterest() {
         balance += (int) (balance * rate);
+    }
+
+    @Override
+    public int compareTo(BankAccount bankAccount) {
+        int bal1 = getBalance();
+        int bal2 = bankAccount.getBalance();
+        if (bal1 == bal2)
+            return getAcctNum() - bankAccount.getAcctNum();
+        else
+            return bal1 - bal2;
     }
 }
