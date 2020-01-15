@@ -96,7 +96,8 @@ public class BankClient {
 
     private int requestType() {
         System.out.print("Enter 1 for Savings," +
-                " 2 for Checking: ");
+                " 2 for Checking: " +
+                "3 for interest checking ");
         int val = scanner.nextInt();
         return val;
     }

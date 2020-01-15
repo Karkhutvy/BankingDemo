@@ -17,9 +17,10 @@ public class Bank {
         BankAccount ba;
         if (type == 1) {
             ba = new SavingsAccount(acctNum);
-        } else {
+        } else if (type == 2){
             ba = new CheckingAccount(acctNum);
-        }
+        } else
+            ba = new InterestChecking(acctNum);
         ba.setForeign(isForeign);
         accounts.put(acctNum, ba);
         return acctNum;
