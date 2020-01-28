@@ -2,11 +2,11 @@ package com.company;
 
 public class RegularChecking extends CheckingAccount {
 
-    public RegularChecking(int accnum){
+    public RegularChecking(int accnum) {
         super(accnum);
     }
 
-    public void addInterest(){
+    public void addInterest() {
         //stub
     }
 

@@ -1,13 +1,13 @@
 package com.company;
 
 import java.util.Date;
-import java.util.HashMap;
+import java.util.Map;
 
 public class Bank {
-    private HashMap<Integer, BankAccount> accounts;
+    private Map<Integer, BankAccount> accounts;
     private int nextAcct;
 
-    public Bank(HashMap<Integer, BankAccount> accounts, int nextAcct) {
+    public Bank(Map<Integer, BankAccount> accounts, int nextAcct) {
         this.accounts = accounts;
         this.nextAcct = nextAcct;
     }
@@ -18,7 +18,7 @@ public class Bank {
         if (type == 1) {
             ba = new SavingsAccount(acctNum);
         } else if (type == 2){
-            ba = new CheckingAccount(acctNum);
+            ba = new RegularChecking(acctNum);
         } else
             ba = new InterestChecking(acctNum);
         ba.setForeign(isForeign);

@@ -3,7 +3,7 @@ package com.company;
 public class InterestChecking extends CheckingAccount {
     private double rate = 0.01;
 
-    public InterestChecking(int acctnum){
+    public InterestChecking(int acctnum) {
         super(acctnum);
     }
 
@@ -14,8 +14,8 @@ public class InterestChecking extends CheckingAccount {
                 + (isForeign ? "foreign" : "domestic");
     }
 
-    public void addInterest(){
-        int newBalance = (int)(getBalance() * rate);
+    public void addInterest() {
+        int newBalance = (int) (getBalance() * rate);
         deposit(newBalance);
     }
 }
