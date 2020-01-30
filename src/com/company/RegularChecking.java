@@ -6,6 +6,16 @@ public class RegularChecking extends CheckingAccount {
         super(accnum);
     }
 
+    @Override
+    protected String accountType() {
+        return "Regular Checking";
+    }
+
+    @Override
+    protected double interestRate() {
+        return 0.0;
+    }
+
     public void addInterest() {
         //stub
     }

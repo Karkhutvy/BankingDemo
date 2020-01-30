@@ -1,7 +1,5 @@
 package com.company;
 
-import java.util.Objects;
-
 public class SavingsAccount extends AbstractBankAccount {
     private double rate = 0.1;
 
@@ -10,21 +8,19 @@ public class SavingsAccount extends AbstractBankAccount {
         super(a);
     }
 
-    public boolean hasEnoughCollateral(int loanAmt) {
-        return balance >= loanAmt / 2;
+    @Override
+    protected double collateralRatio() {
+        return 1.0 / 2.0;
     }
 
     @Override
-    public String toString() {
-        return "SavingsAccount{" +
-                "acctnum=" + acctnum +
-                ", balance=" + balance +
-                ", isforeign=" + (isForeign ? "foreign " : "domestic ") +
-                '}';
+    protected double interestRate() {
+        return 0.01;
     }
 
-    public void addInterest() {
-        balance += (int) (balance * rate);
+    @Override
+    protected String accountType() {
+        return "Savings";
     }
 
 }

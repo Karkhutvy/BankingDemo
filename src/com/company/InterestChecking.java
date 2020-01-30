@@ -8,14 +8,12 @@ public class InterestChecking extends CheckingAccount {
     }
 
     @Override
-    public String toString() {
-        return "Interest checking account" + acctnum
-                + ": balance =" + balance + ", is "
-                + (isForeign ? "foreign" : "domestic");
+    protected String accountType() {
+        return "Interest Checking";
     }
 
-    public void addInterest() {
-        int newBalance = (int) (getBalance() * rate);
-        deposit(newBalance);
+    @Override
+    protected double interestRate() {
+        return rate;
     }
 }

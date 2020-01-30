@@ -1,7 +1,5 @@
 package com.company;
 
-import com.sun.deploy.security.SelectableSecurityManager;
-
 public abstract class AbstractBankAccount implements BankAccount {
     protected int acctnum;
     protected int balance = 0;
@@ -48,9 +46,24 @@ public abstract class AbstractBankAccount implements BankAccount {
         return getAcctNum() == ba.getAcctNum();
     }
 
-    public abstract boolean hasEnoughCollateral(int loanamt);
+    public boolean hasEnoughCollateral(int loanamt){
+        double ratio = collateralRatio();
+        return balance >= loanamt * ratio;
+    }
 
-    public abstract String toString();
+    public String toString(){
+        String accType = accountType();
+        return accType +" account" + acctnum + " :balance=" + balance +", is"
+                +(isForeign ? "foreign" : "domestic");
+    }
 
-    public abstract void addInterest();
+    public void addInterest(){
+        balance += (int)(balance * interestRate());
+    }
+
+    protected abstract double collateralRatio();
+    protected abstract double interestRate();
+    protected abstract String accountType();
+
+
 }
